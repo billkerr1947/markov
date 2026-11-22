@@ -3,33 +3,34 @@ Markov chain generative poetry: Small Language Model
 
 ### USING NGRAMS AND MARKOV CHAINS TO GENERATE POETRY
 
-“What I cannot create, I do not understand”
+> “What I cannot create, I do not understand”
 Richard  Feynmann
+
 This is an all purpose quote which does encapsulate most of my new learning, be it ngrams, markov chains or python
 
-My goal: Starting with a corpus of known poetry or literature, my goal is to generate markov chain new “poetic” / interesting / close to grammatically sound / sort of (‘sorta’) meaningful sentences. ie. to make a small language model.
+**My goal**: Starting with a corpus of known poetry or literature, my goal is to generate markov chain new “poetic” / interesting / close to grammatically sound / sort of (‘sorta’) meaningful sentences. ie. to make a small language model.
 
 Achieving this goal helped me with a broader, more all purpose goal: to become more knowledgable and fluent in my python programming. Leaving to one side for now, the discussion: In the age of vibe coding is it still worthwhile to develop python expertise?
 
 I’m always looking for inspirational exemplars. I need that for self motivation as well as something worth teaching, since I still regard my self as a wannabe educator. 
 
-There is much online information about ngrams, markov chains and their uses. After some searching I discovered that they could be used to generate poetry. I liked Allison Parrish’s approach (see reference) in that she regards herself and exemplifies as a combination of ARTIST + ENGINEER. IMO she is a great teacher. 
+There is much online information about ngrams, markov chains and their uses. After some searching I discovered that they could be used to generate poetry. I liked Allison Parrish’s approach (see reference) in that she regards herself and exemplifies as a combination of **ARTIST + ENGINEER**. IMO she is a great teacher. 
 
 However, I also discovered some very elegant and brief code from the somewhat cynical Mehrab Jamee, but which was also, I felt, limited in some respects. So, after much experimentation, I opted for improving Mehrab’s code as my way forward, whilst retaining Allison as a tutor.
 https://medium.com/upperlinecode/making-a-markov-chain-poem-generator-in-python-4903d0586957
 
-DESIGN PROCESS
+### DESIGN PROCESS
 
 We are making a language model! What this means is that you input some words (eg. poetry) in some form and the model transforms those words so that the end result is a different string of words which are meaningful in some sense, not random nonsense. The model we are making can be called a Markov language model.
 
 My design, which is the most important part of the whole process, initially took a wrong pathway, rather wrong pathways! On the internet you find code, good or not so good, and explanation of varying quality: absent, poor, wonderful. I wasn’t clear about the correct ways or good ways of using a markov chain to produce new sentences. 
 
 Eventually this sentence from Allison Parish revealed a good way: 
-The easiest way to represent this model is with a dictionary whose keys are the n-grams and whose values are all of the possible "nexts." 
+*The easiest way to represent this model is with a dictionary whose keys are the n-grams and whose values are all of the possible "nexts."* 
 
-THE BIG PICTURE: NGRAMS AND MARKOV CHAINS
+### THE BIG PICTURE: NGRAMS AND MARKOV CHAINS
 
-To illustrate I’ll apply it to this sentence: “Ngrams are a successive list of the order in which words appear in a sentence.” 
+To illustrate I’ll apply it to this sentence: **“Ngrams are a successive list of the order in which words appear in a sentence.”** 
 
 Ngrams may have a length of one (unigram), two (bigram), three (trigrams) or more. So for the above sentence an Ngram of size 2, aka a bigram, would look like:
 [[‘Ngrams’, ‘are’], [‘are’, ‘a’], …. [‘a’, ‘sentence’]]
@@ -48,22 +49,22 @@ But if you have a big corpus, a long text, then we will often have many values f
 Note that ‘to’ follows ‘come’ three times, ‘out’ follows ‘come’ four times and ‘floating’ follows come only once. So if we pick a random value for the key ‘come’ then some words are more likely to follow than others. Probabilistic or markov chain outcomes are achieved without calculating any probabilities. 
 
 The python code can be split conceptually into the following parts:
-Uploading and preparing text files
-Making the markov dictionary, using for loops
-Explanation of the for loops
-Use the markov chains to generate a message with a while loop
-Refining, testing, debugging
+- Uploading and preparing text files
+- Making the markov dictionary, using for loops
+- Explanation of the for loops
+- Use the markov chains to generate a message with a while loop
+- Refining, testing, debugging
 
-UPLOADING AND PREPARING TEXT FILES
+### UPLOADING AND PREPARING TEXT FILES ###
 
-For my main text I’ve copied Mehrab Jamee who used the poem “Stray Birds” by Rabindranath Tagore. Rabindranath Tagore was the first Asian Nobel Laureate. So we are starting with a text file, stray_birds.txt. 
+For my main text I’ve copied Mehrab Jamee who used the poem *“Stray Birds”* by Rabindranath Tagore. Rabindranath Tagore was the first Asian Nobel Laureate. So we are starting with a text file, stray_birds.txt. 
 
 There is quite a bit of text preparation required to get the text into a form where the words can be rearranged and still make sense:
     • remove all digits
     • replace line breaks, commas and some other characters with spaces
     • remove capitals
 
-  MAKING THE MARKOV DICTIONARY, USING FOR LOOPS
+ ### MAKING THE MARKOV DICTIONARY, USING FOR LOOPS
 
 Then the text was converted into lists of words inside lists of sentences: [[s1w1, s2w2, ..][s2w1, s2w2 …] etc … ]. The main reason for the nested lists was that I didn’t want the ngrams to overlap from the end of one sentence to the start of the next sentence since that sort of flow is different from the flow that occurs within a sentence.
 
@@ -81,7 +82,7 @@ But IMO some things in Mehrab’s code need improving. The ability to modify ngr
 Mehrab Jamee design: Each key is a single word from the poem, and the value of each key is a list of the words that immediately followed it.
 My modified design: Each key is a ngram tuple taken from each sentence of the poem, and the value of each key is a list of the words that immediately followed it. 
 
-EXPLANATION OF THE FOR LOOPS
+### EXPLANATION OF THE FOR LOOPS
 Extract from the markov function:
 
     N = 2 #ngram size
