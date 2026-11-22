@@ -115,76 +115,78 @@ The else: statement is activated first since that adds the key: value pairs to t
 
 The outer loop iterates over the sentences. The index needs to be reset to 1 for each sentence.
 
-USE THE MARKOV CHAINS TO GENERATE A MESSAGE WITH A WHILE LOOP
+### USE THE MARKOV CHAINS TO GENERATE A MESSAGE WITH A WHILE LOOP
 
 This code generates a message. It starts with a random ngram from the dictionary chain. Then the while loop iterates over the dictionary getting a random value from each ngram key, then sliding to the next ngram and repeating, until the message word count is achieved. However, if the next ngram is not found in the dictionary keys then break the loop. So, some messages will be shorter than the count length. This raises the issue of data sparsity.
 
-Some theory:
+*Some theory:*
 One of the key limitations of n-gram models is data sparsity. Even in large corpora, there are many valid word sequences that simply don’t occur. When a model encounters an unseen n-gram, it assigns it a probability of zero, which can lead to significant performance issues.
-This is where smoothing techniques come into play. These methods assign small probabilities to unseen n-grams to ensure the model remains robust.
+
+This is where smoothing techniques come into play. These methods assign small probabilities to unseen n-grams to ensure the model remains robust. 
+
 These smoothing techniques are not utilised here. My goal is to achieve sorta meaningful sentences so it’s not an issue if they are shorter. I have kept a "key not found" print message in the code as a reminder.
 
-REFINING, TESTING, DEBUGGING
+### REFINING, TESTING, DEBUGGING
 
 I encountered a problem with the final word of the message. Finishing a sentence with words like : (the, of, in, it, here, your) is a bad look. If the final word is short (<5 letters) and common then the sentence looks and feels weird. To improve this I made a new markov chain with ngram = 1 and then, if the final word was short, I added another longer word from the values of the short word. This is not a perfect solution but it did improve the generated messages significantly. 
 
-SAMPLE OUTPUT
+### SAMPLE OUTPUT
 
 I’ve now run the program many times and am pleased with the results. I found that a main ngram = 2 created interesting sentences. I’ve kept the “key not found” message there as a reminder of why some sentences are shorter. I’ve included other messages to indicate the outcome if the initial final word of the sentence was 4 characters or less. Sometimes there is no longer new word to be added to the short end word.
 
-key not found
+key not found  
 The burden of its tail.
 
-key not found
-'('sun',)' in chain
+key not found  
+'('sun',)' in chain  
 Asked the setting sun.
 
-key not found
+key not found  
 Its bud and cries this is my flower my death.
 
 The silent night has the earth and the glass lamp rebukes the earthen for calling it cousin the moon rises.
 
-key not found
+key not found  
 Lands of barren years to reach the moment scoffs at the burden of their wings.
 
-key not found
+key not found  
 Me asking me their own names.
 
-key not found
-('thee',) in chain
-mother
+key not found  
+('thee',) in chain  
+mother  
 Prove she is the day with the words I love thee mother.
 
-('it',) in chain
-becomes
+('it',) in chain  
+becomes  
 Thy words in their own lamps and sing their own hissing world of mine and am afraid to make it becomes.
 
-key not found
-('fire',) in chain
+key not found  
+('fire',) in chain  
 Chastity is a bag that bursts with the light of the sky and ashes to the fire.
 
-('my',) in chain
-window
+('my',) in chain  
+window  
 Trees like the cry of some early dawn comes to me from my water jar as I walk on my window.
 
-REFERENCE / FURTHER LINKS
+### REFERENCE / FURTHER LINKS
 
-Mehrab Jamee, Markov Chain Poetry, Generated from Stray Birds by Rabindranath Tagore
+Mehrab Jamee, Markov Chain Poetry, Generated from Stray Birds by Rabindranath Tagore  
 https://medium.com/upperlinecode/making-a-markov-chain-poem-generator-in-python-4903d0586957
 
-Allison Parrish is a great teacher. Check out her github for a series of well explained python tutorials. These links are about her markov chain developments:
-https://www.decontextualize.com/teaching/dwwp/topics-n-grams-and-markov-chains/
-She makes a class here but not on her longer github explanation
+Allison Parrish is a great teacher. Check out her github for a series of well explained python tutorials. These links are about her markov chain developments:  
+https://www.decontextualize.com/teaching/dwwp/topics-n-grams-and-markov-chains/  
+She makes a class here but not on her longer github explanation  
 https://github.com/aparrish/rwet/blob/master/ngrams-and-markov-chains.ipynb
 
-This one has an idea which could be an extension of mine: style the poem at the end, control line length (no caps or full stops)
+This one has an idea which could be an extension of mine: style the poem at the end, control line length (no caps or full stops)  
 https://github.com/abdullah1772/poetry-generator-with-markov-models/blob/main/poetry-generator-with-markov-models.ipynb
 
-This next one has more sophisticated coding features, the main one being a Ngram model class. The first link is the article and the other links lead to the code on github
-https://towardsdatascience.com/text-generation-using-n-gram-model-8d12d9802aa0/
-136 lines
-Frankenstein text
-https://github.com/olegborisovv/NGram_LanguageModel
+This next one has more sophisticated coding features, the main one being a Ngram model class. The first link is the article and the other links lead to the code on github  
+https://towardsdatascience.com/text-generation-using-n-gram-model-8d12d9802aa0/  
+136 lines  
+Frankenstein text  
+https://github.com/olegborisovv/NGram_LanguageModel  
 https://github.com/olegborisovv/NGram_LanguageModel/blob/main/text_generator_ngram.py
 
 
