@@ -38,7 +38,7 @@ Ngrams may have a length of one (unigram), two (bigram), three (trigrams) or mor
 A Markov chain consists of an Ngram followed by a target or targets. It informs us of the probability that a given Ngram will be followed by a particular target. So, for the above sentence a unigram followed by a target would look like this dictionary:
 {(‘Ngrams’): [‘are], (‘are’) : [‘a’]], (‘a’) : [‘successive’, ‘sentence’] … etc }
 
-Other descriptors here are context window where the Ngram, which can vary in length, provides the context for the target. “You can predict a word by the company it keeps”. This famous saying encapsulates the statistical approach to language models in one short sentence.
+Other descriptors here are *context window* where the Ngram, which can vary in length, provides the context for the target. *“You can predict a word by the company it keeps”*. This famous saying encapsulates the statistical approach to language models in one short sentence.
 
 Technical point: The dictionary keys are written as tuples not lists since dictionary keys have to be immutable and lists are mutable.
 
