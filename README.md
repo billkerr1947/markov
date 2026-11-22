@@ -1,7 +1,7 @@
 # markov
 Markov chain generative poetry: Small Language Model
 
-USING NGRAMS AND MARKOV CHAINS TO GENERATE POETRY
+#USING NGRAMS AND MARKOV CHAINS TO GENERATE POETRY
 
 “What I cannot create, I do not understand”
 Richard  Feynmann
